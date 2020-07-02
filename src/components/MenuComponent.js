@@ -9,8 +9,8 @@ class Menu extends Component {
              dishes: [
                 {
                     id: 0,
-                    name:'Uthappizza',
-                    image: 'assets/images/uthSappizza.png',
+                    name:'uthappizza',
+                    image: 'assets/images/uthappizza.png',
                     category: 'mains',
                     label:'Hot',
                     price:'4.99',
@@ -44,18 +44,19 @@ class Menu extends Component {
      }
 
      render() {
-         const menu= this.state.dishes.map((dish)=>{return(
-          <div key={dish.id} className="col-12-mt-5">
-              <Media tag="li">
+         const menu= this.state.dishes.map((dish)=>{
+             return(
+                <div key={dish.id} className="col-12 mt-5">
+                <Media tag="li">
                   <Media left middle>
                       <Media object src={dish.image} alt={dish.name} />
                   </Media>
-              </Media>
-              <Media body className="ml-5">
-         <Media heading>{dish.name}</Media>
-         <p>{dish.description}</p>
-              </Media>
-          </div>
+                  <Media body className="ml-5">
+                    <Media heading>{dish.name}</Media>
+                    <p>{dish.description}</p>
+                  </Media>
+                </Media>
+              </div>
          );
         
         });
