@@ -32,18 +32,20 @@ renderComment(rC){
     //-------------------------------------------------------
     
         const a= rC.map((comments)=>{  return(
-              
-          <ul>
-            
-          <p>---{comments.author},{new Date(comments.date).toUTCString()}---</p>
-          <p> {comments.comment} </p>    
+         
+          <ul class="list-unstyled">
+            <li> {comments.comment} </li> 
+          <li>--{comments.author},{new Date(comments.date).toUTCString()}--</li>
+             
             </ul>
+
+
         );})
          
         return(
           <div key="11" className="col-12 col-md-5 m-1">
             
-            <h1>Comments</h1>
+            <h1>Comments</h1><br></br><br></br>
               {a}
          
 
