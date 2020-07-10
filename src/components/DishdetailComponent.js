@@ -1,11 +1,12 @@
 import React from 'react';
 
-/*
-import React from 'react';
+
+
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-
-    function RenderDish({dish}) {
+ 
+    function RenderDish(dish) {
+     
       return(
         <div key="12" className="col-12 col-md-5 m-1">
       <Card>
@@ -20,9 +21,9 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
       );
 
     }
-
+/*
     function RenderComments({comments}) {
-      const a= comments.map((comments)=>{  return(
+      const a= comments.comments.map((comments)=>{  return(
          
         <ul class="list-unstyled">
           <li> {comments.comment} </li> 
@@ -44,15 +45,23 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
         )
      
 }
+ // <RenderDish dish = {props}/>
+ 
+ // <RenderComments comments={props}  />
     
-      */
-   
+     
+   */
 
     const  DishDetail = (props) => {
-    
-    console.log(props);
-  return <h1>{props.name}</h1>
-      
+  console.log(props)
+  return (
+
+   <div className="row">
+ <RenderDish dish = {props}/>
+
+</div> 
+      );
     };
+
 
 export default DishDetail;
