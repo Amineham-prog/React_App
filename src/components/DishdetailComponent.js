@@ -44,9 +44,7 @@ import { Link } from 'react-router-dom';
       );
 
           }
- // <RenderDish dish = {props}/>
- 
- // <RenderComments comments={props}  />
+
     
      
    
