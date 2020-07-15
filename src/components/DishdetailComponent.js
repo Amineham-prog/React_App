@@ -2,7 +2,8 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
  
-    function RenderDish({dish}) {
+
+function RenderDish({dish}) {
      
       return(
         <div key="12" className="col-12 col-md-5 m-1">
@@ -44,14 +45,18 @@ import { Link } from 'react-router-dom';
       );
 
           }
+        
+        
+      
+    //----------------------------------------------------------------
 
-    
-     
-   
 
-    const  DishDetail = (props) => {
-      if (props.dish !=null)
+const  DishDetail = (props) => {
+
+
+ if (props.dish !=null){
   return (
+
    <div class="container">
      <div className="row">
                 <Breadcrumb>
@@ -70,11 +75,12 @@ import { Link } from 'react-router-dom';
  <RenderComments comments={props.comments}  />
 </div>
 </div> 
-      );
-  else{
-    return(<div></div>)
-  }
-    };
+      );}
+  else {
+    return(<div></div>)}
+  
+}
+
 
 
 export default DishDetail;
