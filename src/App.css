@@ -32,3 +32,16 @@ address{
 .navbar-dark {
   background-color: #512DA8;
 }
+
+
+
+select {
+  border-radius: 0;
+  height: 2rem;
+  width: 100%;
+  
+  &:focus {
+    border: 2px solid $color-primary;
+    outline: none;
+  }
+}
