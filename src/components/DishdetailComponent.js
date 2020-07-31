@@ -174,6 +174,7 @@ const  DishDetail = (props) => {
     );
 }
 else if (props.errMess) {
+  console.log(props.errMess)
     return(
         <div className="container">
             <div className="row">            

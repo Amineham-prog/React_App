@@ -13,6 +13,7 @@ import { actions } from 'react-redux-form';
 
 
 const mapStateToProps=state=>{
+  console.log(state.dishes)
     return {
       dishes: state.dishes,
       comments: state.comments,
@@ -47,6 +48,7 @@ constructor(props) {
 
 render(){
     const HomePage =() =>{
+      console.log(this.props.dishes.errMess)
         return(
           <Home 
           dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
@@ -61,6 +63,7 @@ render(){
     }
 
     const DishWithId=({match})=>{
+      console.log(this.props.errMess)
     return(
       <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
       isLoading={this.props.dishes.isLoading}
