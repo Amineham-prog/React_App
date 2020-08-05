@@ -1,16 +1,17 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
 //-------------------RenderLeader-------------------------
 
 function RenderLeader({leader}){
-    console.log(leader.name)
-    return(
+ 
+        return(
         <Media>
         <Media left middle>
-                      <Media object src={leader.image} alt={leader.name} />
+                      <Media object src={baseUrl +leader.image} alt={leader.name} />
                   </Media>
                   <Media body className="ml-5">
                     <Media heading>{leader.name}</Media>
@@ -31,20 +32,37 @@ function RenderLeader({leader}){
 
 
 function About(props){//-----------function About-------------
-
-const leaders=props.leaders.map((leader)=>{ //----------map RenderLeader----------------
+console.log(props.isLoading)
+const leaders=()=>{//---------Leaders became a function----------------
+if(props.isLoading) {
+    return(
+            <Loading />
+    );
+}
+else if (props.errMess) {
+  
+    return(
+            <h4>{props.errMess}</h4>
+    );
+}
+else 
+    return(
+props.leaders.map((leader)=>{ //----------map RenderLeader----------------
 return(
 <div className="col-12">
-
-
-<RenderLeader leader={leader} />
-
+<RenderLeader leader={leader}
+              isLoading={props.isLoading}
+              errMess={props.errMess} />
+             
 </div>
 
 );
-}) //-----------------------------------end Map-------------------------
-    
-return(
+}) 
+)
+}
+//-----------------------------------end Map-------------------------
+
+    return(   
 <div className="container">
 <div className="row">
                 <Breadcrumb>
@@ -101,7 +119,7 @@ return(
         <div className="col-12">
             <h2>Corporate Leadership</h2>
         </div>
-               {leaders} 
+               {leaders()} 
             </div>
             
   
@@ -110,6 +128,7 @@ return(
     
 );
 }
+
 //---------------------End About-------------------
 
 export default About;    

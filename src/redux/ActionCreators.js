@@ -3,11 +3,17 @@ import * as ActionTypes from './ActionTypes';
 //import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
+
+//-------------------------------------------------------------ADD COMMENTS----------------------------------------------------
 export const addComment = (comment) => ({
   type: ActionTypes.ADD_COMMENT,
   payload: comment
 });
+//-------------------------------------------------------------------End ADD Comments-------------------------
 
+
+
+//-------------------------------------------------------------POST Comment----------------------------------------------------
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
 
   const newComment = {
@@ -42,8 +48,19 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
   .then(response => dispatch(addComment(response)))
   .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
 };
+//------------------------------------------end Post Comments--------------------------------------------------------------------------
 
 
+//---------------------------------------------POST FEEDBACK------------------------------------------------------------------------------------
+
+
+
+
+
+//---------------------------------------------------end post feedback-------------------------------------------------------------------------
+
+
+//------------------------------------------------FETCH DISHES----------------------------------------------------------------------------
 export const fetchDishes = () => (dispatch) => {
   console.log(Response);
     dispatch(dishesLoading(true));
@@ -85,7 +102,10 @@ export const addDishes = (dishes) => ({
     type: ActionTypes.ADD_DISHES,
     payload: dishes
 });
+//-------------------------------------------------------end Fetch Dishes-------------------------------
 
+
+//-------------------------------------------------------fetch Comments------------------------------------
 export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')
     .then(response => {
@@ -117,8 +137,10 @@ export const addComments = (comments) => ({
     type: ActionTypes.ADD_COMMENTS,
     payload: comments
 });
+//-----------------------------------end fetch comments---------------------------------------------------------------------------------------
 
 
+//-----------------------------------fetch promos----------------------------------------------------------------------------------------------
 export const fetchPromos = () => (dispatch) => {
     
     dispatch(promosLoading());
@@ -155,3 +177,58 @@ export const addPromos = (promos) => ({
     type: ActionTypes.ADD_PROMOS,
     payload: promos
 });
+
+
+
+//------------------------Fetch Leaders-----------------------------------------------------------------------------------------------------
+export const fetchLeaders = () => (dispatch) => {
+  console.log(Response);
+    dispatch(leadersLoading(true));
+
+    return fetch(baseUrl + 'leaders')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(leaders =>{console.log(leaders); 
+      return dispatch(addLeaders(leaders))})
+    
+
+
+  
+    .catch(error => {console.log(error.message);
+      return dispatch(leadersFailed(error.message))});
+}
+
+//------------------LeadersLoading---------------------
+export const leadersLoading = () => ({
+    type: ActionTypes.LEADERS_LOADING
+});
+
+//----------------leadersFailed---------------------
+export const leadersFailed = (errmess) =>{
+ console.log(errmess);
+ 
+  return ({
+    type: ActionTypes.LEADERS_FAILED,
+    payload: errmess
+});
+} 
+
+//----------------AddLeaders--------------------------
+export const addLeaders = (leaders) => ({
+    type: ActionTypes.ADD_LEADERS,
+    payload: leaders
+});
+//-----------------------------------------------------------------------end fetch leaders--------------------------------------------
+
