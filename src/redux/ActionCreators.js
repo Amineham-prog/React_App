@@ -1,6 +1,5 @@
 //import everything from a files.
 import * as ActionTypes from './ActionTypes';
-//import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
 
@@ -51,13 +50,44 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
 //------------------------------------------end Post Comments--------------------------------------------------------------------------
 
 
+
+
+
 //---------------------------------------------POST FEEDBACK------------------------------------------------------------------------------------
+export const postFeedback = (values) => (dispatch) => {
 
+  const newFeedback = {...values, date:new Date().toISOString()};
+      
+  
 
-
-
-
+  
+  return fetch(baseUrl + 'feedback ', {
+      method: "POST",
+      body: JSON.stringify(newFeedback),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+  })
+  .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+          throw error;
+    })
+  .then(response => response.json())
+  .then(response => alert('thank you for your feedback !\n' + JSON.stringify(response)))
+  .catch(error => alert(error) );
+};
 //---------------------------------------------------end post feedback-------------------------------------------------------------------------
+
+
 
 
 //------------------------------------------------FETCH DISHES----------------------------------------------------------------------------
@@ -105,6 +135,9 @@ export const addDishes = (dishes) => ({
 //-------------------------------------------------------end Fetch Dishes-------------------------------
 
 
+
+
+
 //-------------------------------------------------------fetch Comments------------------------------------
 export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')
@@ -138,6 +171,9 @@ export const addComments = (comments) => ({
     payload: comments
 });
 //-----------------------------------end fetch comments---------------------------------------------------------------------------------------
+
+
+
 
 
 //-----------------------------------fetch promos----------------------------------------------------------------------------------------------
@@ -177,6 +213,8 @@ export const addPromos = (promos) => ({
     type: ActionTypes.ADD_PROMOS,
     payload: promos
 });
+//----------------end Fetch promos----------------
+
 
 
 

@@ -3,13 +3,16 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from 'react-animation-components';
 
 //-------------------RenderLeader-------------------------
 
 function RenderLeader({leader}){
  
         return(
+ 
         <Media>
+
         <Media left middle>
                       <Media object src={baseUrl +leader.image} alt={leader.name} />
                   </Media>
@@ -21,6 +24,7 @@ function RenderLeader({leader}){
                   </Media>
 
        </Media>
+       
     );}
 //--------------------------End RenderLeader----------------------------
 
@@ -34,7 +38,7 @@ function RenderLeader({leader}){
 function About(props){//-----------function About-------------
 console.log(props.isLoading)
 const leaders=()=>{//---------Leaders became a function----------------
-if(props.isLoading) {
+if(props.isLoading) { //------------------Handle error ----------------
     return(
             <Loading />
     );
@@ -46,20 +50,28 @@ else if (props.errMess) {
     );
 }
 else 
+//-----------------Animation task 3-----------------------------
     return(
+<Stagger delay={200} in>
+{
 props.leaders.map((leader)=>{ //----------map RenderLeader----------------
 return(
+<Fade in>
 <div className="col-12">
+
 <RenderLeader leader={leader}
               isLoading={props.isLoading}
-              errMess={props.errMess} />
-             
+              errMess={props.errMess} />         
 </div>
-
+</Fade>
 );
 }) 
-)
+
 }
+</Stagger>
+)//-----------------------------end Animation----------------
+}
+
 //-----------------------------------end Map-------------------------
 
     return(   
@@ -119,7 +131,10 @@ return(
         <div className="col-12">
             <h2>Corporate Leadership</h2>
         </div>
-               {leaders()} 
+        
+        {leaders()} 
+        
+               
             </div>
             
   
